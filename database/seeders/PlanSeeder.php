@@ -16,14 +16,14 @@ class PlanSeeder extends Seeder
     {
         Plan::create([
             'slug' => 'monthly',
-            'price' => 1200,
-            'duration_in_days' => 30,
+            'price' => 1200, //12.00
+            'duration_in_days' => 30
         ]);
 
         Plan::create([
             'slug' => 'yearly',
-            'price' => 9999,
-            'duration_in_days' => 365,
+            'price' => 9999, //99.99
+            'duration_in_days' => 365
         ]);
     }
 }

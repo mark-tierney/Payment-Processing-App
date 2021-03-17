@@ -34,6 +34,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @if (! optional(auth()->user())->hasActiveSubscription())
+                            <li class="nav-item">
+                                <a href="{{ route('subscribe.show') }}" class="btn btn-outline-primary">Subscribe</a>
+                            </li>
+                        @endif    
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>

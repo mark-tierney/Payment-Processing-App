@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,6 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PaymentPlatformsTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
-        $this->class(PlanSeeder::class);
+        $this->call(PlanSeeder::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Models\Subscription;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +15,11 @@ class Plan extends Model
 
     public function subscriptions()
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(Ssubscription::class);
+    }
+
+    public function getVisualPriceAttribute()
+    {
+        return '$' . number_format($this->price / 100, 2, '.', ',');
     }
 }
