@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentPlatform;
 use App\Models\Plan;
+use App\Models\Subscription;
 use App\Resolvers\PaymentPlatformResolver;
 use Illuminate\Http\Request;
 
@@ -45,13 +46,45 @@ class SubscriptionController extends Controller
         return $paymentPlatform->handleSubscription($request);
     }
 
-    public function approval()
+    public function approval(Request $request)
     {
+        $rules = [
+            'plan' => ['required', 'exists:plans,slug'],
+        ];
 
+        $request->validate($rules);
+
+        if(session()->has('subscriptionPlatformId')) {
+            $paymentPlatform = $this->paymentPlatformResolver
+                ->resolveService(session()->get('subscriptionPlatformId'));
+            
+            if($paymentPlatform->validateSubscription($request)) {
+                $plan = Plan::where('slug', $request->plan)->firstOrFail();
+                $user = $request->user();
+
+                $subscription = Subscription::create([
+                    'active_until' => now()->addDays($plan->duration_in_days),
+                    'user_id' => $user->id,
+                    'plan_id' => $plan->id,
+                ]);
+
+                return redirect()
+                    ->route('home')
+                    ->withSuccess(['payment' => "Thanks {$user->name}! You have obtained a {$plan->slug} subscription. Start using it now."]);
+            }
+        }
+
+        return redirect()
+            ->route('subscribe.show')
+            ->withErrors('Subscription validation failed, please try again.');
+
+        
     }
 
     public function cancelled()
     {
-
+        return redirect()
+            ->route('subscribe.show')
+            ->withErrors('You cancelled. Come back whenever you\'re ready.');
     }
 }
