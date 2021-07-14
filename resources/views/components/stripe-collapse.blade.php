@@ -7,35 +7,29 @@
 
         padding: 10px 12px;
 
-        border: 1px solid transparent;
+        
+
+        border: 1px solid white;
         border-radius: 4px;
-        background-color: white;
 
-        box-shadow: 0 1px 3px 0 #e6ebf1;
-        -webkit-transition: box-shadow 150ms ease;
-        transition: box-shadow 150ms ease;
     }
 
-    .StripeElement--focus {
-        box-shadow: 0 1px 3px 0 #cfd7df;
-    }
-
-    .StripeElement--invalid {
-        border-color: #fa755a;
-    }
-
-    .StripeElement--webkit-autofill {
-        background-color: #fefde5 !important;
-    }
 </style>
 @endpush
 <label class="mt-3" for="card-element">
-    Card details:
+    Card details: 
 </label>
 
 <div id="cardElement"></div>
 
 <small class="form-text text-muted" id="cardErrors" role="alert"></small>
+
+<div class="alert alert-info">
+    <p><i>Use a stripe test card: </i>
+        </br> &nbsp; No authentication: &nbsp;  <b> 4242 4242 4242 4242 </b> 02/22 222 22222 
+        </br> &nbsp; 3d secure: &emsp; &emsp; &emsp; &nbsp; <b> 4000 0027 6000 3184 </b> 02/22 222 22222 
+    </p>
+</div>
 
 <input type="hidden" name="payment_method" id="paymentMethod">
 
@@ -45,7 +39,28 @@
     const stripe = Stripe('{{ config('services.stripe.key') }}');
 
     const elements = stripe.elements({ locale: 'en' });
-    const cardElement = elements.create('card');
+    const cardElement = elements.create('card', {
+        style: {
+            base: {
+            iconColor: '#c4f0ff',
+            color: '#fff',
+            fontWeight: '500',
+            fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+            fontSize: '16px',
+            fontSmoothing: 'antialiased',
+            ':-webkit-autofill': {
+                color: '#fce883',
+            },
+            '::placeholder': {
+                color: '#87BBFD',
+            },
+            },
+            invalid: {
+            iconColor: '#FFC7EE',
+            color: '#FFC7EE',
+            },
+        },
+    });
 
     cardElement.mount('#cardElement');
 </script>

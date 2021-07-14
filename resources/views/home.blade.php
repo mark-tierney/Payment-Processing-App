@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg-dark text-white">
                 <div class="card-header">Make a Payment</div>
 
                 <div class="card-body">
@@ -14,12 +14,12 @@
                         @csrf
                         <div class="row">
                             <div class="col-auto">
-                                <label>How much you want to pay?</label>
+                                <label>How much would you like to pay?</label>
                                 <input
                                     type="number"
                                     min="5"
                                     step="0.01"
-                                    class="form-control"
+                                    class="form-control bg-dark text-white "
                                     name="value"
                                     value="{{mt_rand(500,100000) / 100}}"
                                 >   
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-auto">
                                 <label>Currency</label>
-                                <select name="currency" class="custom-select" required>
+                                <select name="currency" class="custom-select bg-dark text-white" required>
                                     @foreach ($currencies as $currency)
                                         <option value="{{ $currency->iso }}">
                                             {{ strtoupper($currency->iso) }}
@@ -47,7 +47,7 @@
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         @foreach ($paymentPlatforms as $paymentPlatform)
                                             <label 
-                                                class="btn btn-outline-secondary rounded m-2 p-1"
+                                                class="btn rounded m-1 p-2"
                                                 data-target="#{{ $paymentPlatform->name }}Collapse"
                                                 data-toggle="collapse"
                                             >

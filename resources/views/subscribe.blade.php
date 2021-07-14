@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg-dark text-white">
                 <div class="card-header">Subscribe</div>
 
                 <div class="card-body">
@@ -49,7 +49,7 @@
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         @foreach ($paymentPlatforms as $paymentPlatform)
                                             <label
-                                                class="btn btn-outline-secondary rounded m-2 p-1"
+                                                class="btn rounded m-2 p-2"
                                                 data-target="#{{ $paymentPlatform->name }}Collapse"
                                                 data-toggle="collapse"
                                             >
