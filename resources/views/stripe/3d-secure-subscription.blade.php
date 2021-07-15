@@ -20,12 +20,15 @@
 <script>
     const stripe = Stripe('{{ config('services.stripe.key') }}');
 
-    stripe.handleCardAction("{{ $clientSecret }}")
+    stripe.confirmCardPayment("{{ $clientSecret }}", {payment_method: "{{ $paymentMethod }}"})
         .then(function(result) {
             if (result.error) {
-                window.location.replace("{{ route('cancelled') }}");
+                window.location.replace("{{ route('subscribe.cancelled') }}");
             } else {
-                window.location.replace("{{ route('approval') }}");
+                window.location.replace("{!! route('subscribe.approval', [
+                    'plan' => $plan,
+                    'subscription_id' => $subscriptionId,
+                ]) !!}");
             }
         })
 </script>

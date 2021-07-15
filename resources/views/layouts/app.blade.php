@@ -19,10 +19,27 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 
+    <style>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+        border: 1px solid white;
+        -webkit-text-fill-color: white;
+        -webkit-box-shadow: 0 0 0px 1000px #343A40 inset;
+        transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+
 </head>
-<body>
+<body  class=" bg-dark">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-image: linear-gradient(to right, #4499ee , #44cccc);">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -34,6 +51,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @if (! optional(auth()->user())->hasActiveSubscription())
+                            <li class="nav-item">
+                                <a href="{{ route('subscribe.show') }}" class="btn btn-outline-light">Subscribe</a>
+                            </li>
+                        @endif    
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
@@ -56,12 +78,12 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="dropdown-menu dropdown-menu-right bg-dark " aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-dark text-white" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
