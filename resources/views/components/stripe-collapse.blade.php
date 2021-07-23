@@ -26,8 +26,8 @@
 
 <div class="alert alert-info">
     <p><i>Use a stripe test card: </i>
-        </br> &nbsp; No authentication: &nbsp;  <b> 4242 4242 4242 4242 </b> 02/22 222 22222 
-        </br> &nbsp; 3d secure: &emsp; &emsp; &emsp; &nbsp; <b> 4000 0027 6000 3184 </b> 02/22 222 22222 
+        </br> &nbsp; No authentication: &ensp; &nbsp; <b>4242 4242 4242 4242 </b> 02/22 222 22222 
+        </br> &nbsp; 3d secure: &emsp; &emsp; &emsp; &ensp; &nbsp;<b> 4000 0027 6000 3184 </b> 02/22 222 22222 
     </p>
 </div>
 
