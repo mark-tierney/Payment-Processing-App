@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="row d-flex justify-content-end mr-3">
+                        <div class="row d-flex justify-content-end">
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
